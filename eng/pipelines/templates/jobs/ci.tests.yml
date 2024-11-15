@@ -55,7 +55,7 @@ jobs:
         ne(variables['Skip.Test'], 'true'),
         ne(${{ parameters.Matrix }}, '{}')
       )
-    timeoutInMinutes: ${{ parameters.TestTimeoutInMinutes }}
+    timeoutInMinutes: 3
 
     dependsOn:
       - ${{ parameters.DependsOn }}
