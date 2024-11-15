@@ -29,6 +29,11 @@ steps:
     parameters:
       Activate: false
 
+  - pwsh: |
+      Start-Sleep -Seconds 300
+    displayName: "Time the tests out after 1 minute"
+    timeoutInMinutes: 1
+
   - template: set-dev-build.yml
 
   - pwsh: |
