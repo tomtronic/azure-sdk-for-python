@@ -29,6 +29,11 @@ steps:
     parameters:
       Activate: false
 
+  - pwsh: |
+      Write-Host "This task will fail."
+      exit 1
+    displayName: "Deliberately fail this task"
+
   - template: set-dev-build.yml
 
   - pwsh: |
