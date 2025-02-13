@@ -4,6 +4,8 @@ extends:
     oneESTemplateTag: release
     stages:
       - stage: GenerateCoverage
+        variables:
+          Run.ToxCustomEnvs: "whl"
         jobs:
           - template: /eng/common/pipelines/templates/jobs/generate-job-matrix.yml
             parameters:
