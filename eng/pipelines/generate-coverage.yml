@@ -37,7 +37,6 @@ extends:
                   inputs:
                     filePath: /eng/common/scripts/Save-Package-Properties.ps1
                     arguments: >
-                      -ServiceDirectory '${{parameters.ServiceDirectory}}'
                       -OutDirectory '$(Build.ArtifactStagingDirectory)/PackageInfo'
                     pwsh: true
               CloudConfig:
