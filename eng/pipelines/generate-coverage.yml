@@ -29,7 +29,7 @@ extends:
                 - "**/*matrix*.json"
               EnablePRGeneration: true
               PRMatrixSetting: "TargetingString"
-              PRJobBatchSize: 10
+              PRJobBatchSize: 20
               PreGenerationSteps:
                 - task: UsePythonVersion@0
                   inputs:
@@ -53,6 +53,6 @@ extends:
               AdditionalParameters:
                 ServiceDirectory: 'auto'
                 TestPipeline: false
-                TestTimeoutInMinutes: 60
+                TestTimeoutInMinutes: 120
                 ToxEnvParallel: 'all'
                 TestProxy: true
