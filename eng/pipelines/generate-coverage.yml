@@ -1,0 +1,56 @@
+extends:
+  template: /eng/pipelines/templates/stages/1es-redirect.yml
+  parameters:
+    oneESTemplateTag: release
+    stages:
+      - stage: GenerateCoverage
+        jobs:
+          - template: /eng/common/pipelines/templates/jobs/generate-job-matrix.yml
+            parameters:
+              JobTemplatePath: /eng/pipelines/templates/jobs/ci.tests.yml
+              OsVmImage: azsdk-pool-mms-ubuntu-2004-1espt
+              Pool: azsdk-pool-mms-ubuntu-2004-general
+              MatrixConfigs:
+                - Name: Python_ci_test_base
+                  Path: eng/pipelines/templates/stages/coverage-matrix.json
+                  Selection: sparse
+                  GenerateVMJobs: true
+              SparseCheckoutPaths:
+                - "**/setup.py"
+                - "**/pyproject.toml"
+                - "tools/"
+                - "**/ci*.yml"
+                - "**/_version.py"
+                - "**/version.py"
+                - "**/README.md"
+                - "**/CHANGELOG.md"
+                - "**/*matrix*.json"
+              EnablePRGeneration: true
+              PRMatrixSetting: "TargetingString"
+              PRJobBatchSize: 10
+              PreGenerationSteps:
+                - task: UsePythonVersion@0
+                  inputs:
+                    versionSpec: '3.12'
+                - task: Powershell@2
+                  displayName: Save package properties
+                  inputs:
+                    filePath: /eng/common/scripts/Save-Package-Properties.ps1
+                    arguments: >
+                      -ServiceDirectory '${{parameters.ServiceDirectory}}'
+                      -OutDirectory '$(Build.ArtifactStagingDirectory)/PackageInfo'
+                    pwsh: true
+              CloudConfig:
+                Cloud: Public
+              AdditionalParameters:
+                ServiceDirectory: ${{ parameters.ServiceDirectory }}
+                TestPipeline: ${{ parameters.TestPipeline }}
+                TestMarkArgument: ${{ parameters.TestMarkArgument }}
+                BeforeTestSteps: ${{ parameters.BeforeTestSteps }}
+                AfterTestSteps: ${{ parameters.AfterTestSteps }}
+                BuildTargetingString: ${{ parameters.BuildTargetingString }}
+                TestTimeoutInMinutes: ${{ parameters.TestTimeoutInMinutes }}
+                ToxEnvParallel: ${{ parameters.ToxEnvParallel }}
+                InjectedPackages: ${{ parameters.InjectedPackages }}
+                UnsupportedToxEnvironments: ${{ parameters.UnsupportedToxEnvironments }}
+                TestProxy: ${{ parameters.TestProxy }}

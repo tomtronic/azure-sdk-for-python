@@ -1,0 +1,21 @@
+{
+  "displayNames": {
+    "--disablecov": "",
+    "false": "",
+    "true": ""
+  },
+  "matrix": {},
+  "include": [
+    {
+      "CoverageConfig": {
+        "ubuntu2004_39_coverage": {
+          "OSVmImage": "env:LINUXVMIMAGE",
+          "Pool": "env:LINUXPOOL",
+          "PythonVersion": "3.9",
+          "CoverageArg": "",
+          "TestSamples": "false"
+        }
+      }
+    }
+  ]
+}
