@@ -43,14 +43,8 @@ extends:
               CloudConfig:
                 Cloud: Public
               AdditionalParameters:
-                ServiceDirectory: ${{ parameters.ServiceDirectory }}
-                TestPipeline: ${{ parameters.TestPipeline }}
-                TestMarkArgument: ${{ parameters.TestMarkArgument }}
-                BeforeTestSteps: ${{ parameters.BeforeTestSteps }}
-                AfterTestSteps: ${{ parameters.AfterTestSteps }}
-                BuildTargetingString: ${{ parameters.BuildTargetingString }}
-                TestTimeoutInMinutes: ${{ parameters.TestTimeoutInMinutes }}
-                ToxEnvParallel: ${{ parameters.ToxEnvParallel }}
-                InjectedPackages: ${{ parameters.InjectedPackages }}
-                UnsupportedToxEnvironments: ${{ parameters.UnsupportedToxEnvironments }}
-                TestProxy: ${{ parameters.TestProxy }}
+                ServiceDirectory: 'auto'
+                TestPipeline: false
+                TestTimeoutInMinutes: 60
+                ToxEnvParallel: 'all'
+                TestProxy: true
