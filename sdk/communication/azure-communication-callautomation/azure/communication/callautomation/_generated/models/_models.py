@@ -1,4 +1,4 @@
-# pylint: disable=too-many-lines
+# pylint: disable=line-too-long,useless-suppression,too-many-lines
 # coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -98,8 +98,7 @@ class AddParticipantRequest(_serialization.Model):
      ~azure.communication.callautomation.models.PhoneNumberIdentifierModel
     :ivar source_display_name: (Optional) The display name of the source that is associated with
      this invite operation when
-     adding a PSTN participant or teams user.  Note: Will not update the display name in the
-     roster.
+     adding a PSTN participant or teams user.  Note: Will not update the display name in the roster.
     :vartype source_display_name: str
     :ivar participant_to_add: The participant to invite. Required.
     :vartype participant_to_add:
@@ -156,8 +155,7 @@ class AddParticipantRequest(_serialization.Model):
          ~azure.communication.callautomation.models.PhoneNumberIdentifierModel
         :keyword source_display_name: (Optional) The display name of the source that is associated with
          this invite operation when
-         adding a PSTN participant or teams user.  Note: Will not update the display name in the
-         roster.
+         adding a PSTN participant or teams user.  Note: Will not update the display name in the roster.
         :paramtype source_display_name: str
         :keyword participant_to_add: The participant to invite. Required.
         :paramtype participant_to_add:
@@ -840,20 +838,34 @@ class CallIntelligenceOptions(_serialization.Model):
     :ivar cognitive_services_endpoint: The identifier of the Cognitive Service resource assigned to
      this call.
     :vartype cognitive_services_endpoint: str
+    :ivar backup_cognitive_services_endpoint: A backup identifier of the Cognitive Service resource
+     assigned to this call.
+    :vartype backup_cognitive_services_endpoint: str
     """
 
     _attribute_map = {
         "cognitive_services_endpoint": {"key": "cognitiveServicesEndpoint", "type": "str"},
+        "backup_cognitive_services_endpoint": {"key": "backupCognitiveServicesEndpoint", "type": "str"},
     }
 
-    def __init__(self, *, cognitive_services_endpoint: Optional[str] = None, **kwargs: Any) -> None:
+    def __init__(
+        self,
+        *,
+        cognitive_services_endpoint: Optional[str] = None,
+        backup_cognitive_services_endpoint: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword cognitive_services_endpoint: The identifier of the Cognitive Service resource assigned
          to this call.
         :paramtype cognitive_services_endpoint: str
+        :keyword backup_cognitive_services_endpoint: A backup identifier of the Cognitive Service
+         resource assigned to this call.
+        :paramtype backup_cognitive_services_endpoint: str
         """
         super().__init__(**kwargs)
         self.cognitive_services_endpoint = cognitive_services_endpoint
+        self.backup_cognitive_services_endpoint = backup_cognitive_services_endpoint
 
 
 class CallLocator(_serialization.Model):
@@ -865,8 +877,8 @@ class CallLocator(_serialization.Model):
     :vartype server_call_id: str
     :ivar room_id: The Acs room id. (Not supported for Start Recording).
     :vartype room_id: str
-    :ivar kind: The call locator kind. Known values are: "unknown", "groupCallLocator",
-     "serverCallLocator", and "roomCallLocator".
+    :ivar kind: The call locator kind. Known values are: "groupCallLocator", "serverCallLocator",
+     and "roomCallLocator".
     :vartype kind: str or ~azure.communication.callautomation.models.CallLocatorKind
     """
 
@@ -893,7 +905,7 @@ class CallLocator(_serialization.Model):
         :paramtype server_call_id: str
         :keyword room_id: The Acs room id. (Not supported for Start Recording).
         :paramtype room_id: str
-        :keyword kind: The call locator kind. Known values are: "unknown", "groupCallLocator",
+        :keyword kind: The call locator kind. Known values are: "groupCallLocator",
          "serverCallLocator", and "roomCallLocator".
         :paramtype kind: str or ~azure.communication.callautomation.models.CallLocatorKind
         """
@@ -1442,9 +1454,9 @@ class CommunicationError(_serialization.Model):
         super().__init__(**kwargs)
         self.code = code
         self.message = message
-        self.target = None
-        self.details = None
-        self.inner_error = None
+        self.target: Optional[str] = None
+        self.details: Optional[List["_models.CommunicationError"]] = None
+        self.inner_error: Optional["_models.CommunicationError"] = None
 
 
 class CommunicationErrorResponse(_serialization.Model):
@@ -1935,7 +1947,7 @@ class ContinuousDtmfRecognitionToneReceived(_serialization.Model):
         :paramtype result_information: ~azure.communication.callautomation.models.ResultInformation
         """
         super().__init__(**kwargs)
-        self.sequence_id = None
+        self.sequence_id: Optional[int] = None
         self.tone = tone
         self.call_connection_id = call_connection_id
         self.server_call_id = server_call_id
@@ -2221,7 +2233,7 @@ class DialogCompleted(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.dialog_input_type = dialog_input_type
-        self.dialog_id = None
+        self.dialog_id: Optional[str] = None
         self.call_connection_id = call_connection_id
         self.server_call_id = server_call_id
         self.correlation_id = correlation_id
@@ -2301,8 +2313,8 @@ class DialogConsent(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.dialog_input_type = dialog_input_type
-        self.user_consent = None
-        self.dialog_id = None
+        self.user_consent: Optional["_models.UserConsent"] = None
+        self.dialog_id: Optional[str] = None
         self.call_connection_id = call_connection_id
         self.server_call_id = server_call_id
         self.correlation_id = correlation_id
@@ -2378,7 +2390,7 @@ class DialogFailed(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.dialog_input_type = dialog_input_type
-        self.dialog_id = None
+        self.dialog_id: Optional[str] = None
         self.call_connection_id = call_connection_id
         self.server_call_id = server_call_id
         self.correlation_id = correlation_id
@@ -2458,8 +2470,8 @@ class DialogHangup(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.dialog_input_type = dialog_input_type
-        self.dialog_id = None
-        self.ivr_context = None
+        self.dialog_id: Optional[str] = None
+        self.ivr_context: Optional[JSON] = None
         self.call_connection_id = call_connection_id
         self.server_call_id = server_call_id
         self.correlation_id = correlation_id
@@ -2543,9 +2555,9 @@ class DialogLanguageChange(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.dialog_input_type = dialog_input_type
-        self.dialog_id = None
-        self.selected_language = None
-        self.ivr_context = None
+        self.dialog_id: Optional[str] = None
+        self.selected_language: Optional[str] = None
+        self.ivr_context: Optional[JSON] = None
         self.call_connection_id = call_connection_id
         self.server_call_id = server_call_id
         self.correlation_id = correlation_id
@@ -2625,8 +2637,8 @@ class DialogSensitivityUpdate(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.dialog_input_type = dialog_input_type
-        self.dialog_id = None
-        self.sensitive_mask = None
+        self.dialog_id: Optional[str] = None
+        self.sensitive_mask: Optional[bool] = None
         self.call_connection_id = call_connection_id
         self.server_call_id = server_call_id
         self.correlation_id = correlation_id
@@ -2702,7 +2714,7 @@ class DialogStarted(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.dialog_input_type = dialog_input_type
-        self.dialog_id = None
+        self.dialog_id: Optional[str] = None
         self.call_connection_id = call_connection_id
         self.server_call_id = server_call_id
         self.correlation_id = correlation_id
@@ -2829,10 +2841,10 @@ class DialogTransfer(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.dialog_input_type = dialog_input_type
-        self.dialog_id = None
-        self.transfer_type = None
-        self.transfer_destination = None
-        self.ivr_context = None
+        self.dialog_id: Optional[str] = None
+        self.transfer_type: Optional[str] = None
+        self.transfer_destination: Optional[str] = None
+        self.ivr_context: Optional[JSON] = None
         self.call_connection_id = call_connection_id
         self.server_call_id = server_call_id
         self.correlation_id = correlation_id
@@ -2912,8 +2924,8 @@ class DialogUpdated(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.dialog_input_type = dialog_input_type
-        self.dialog_id = None
-        self.ivr_context = None
+        self.dialog_id: Optional[str] = None
+        self.ivr_context: Optional[JSON] = None
         self.call_connection_id = call_connection_id
         self.server_call_id = server_call_id
         self.correlation_id = correlation_id
@@ -2984,7 +2996,7 @@ class DtmfResult(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.tones = None
+        self.tones: Optional[List[Union[str, "_models.DtmfTone"]]] = None
 
 
 class Error(_serialization.Model):
@@ -3527,14 +3539,14 @@ class IncomingCall(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.to = None
-        self.from_property = None
-        self.caller_display_name = None
-        self.server_call_id = None
-        self.custom_context = None
-        self.incoming_call_context = None
-        self.on_behalf_of_callee = None
-        self.correlation_id = None
+        self.to: Optional["_models.CommunicationIdentifierModel"] = None
+        self.from_property: Optional["_models.CommunicationIdentifierModel"] = None
+        self.caller_display_name: Optional[str] = None
+        self.server_call_id: Optional[str] = None
+        self.custom_context: Optional["_models.CustomCallingContext"] = None
+        self.incoming_call_context: Optional[str] = None
+        self.on_behalf_of_callee: Optional["_models.CommunicationIdentifierModel"] = None
+        self.correlation_id: Optional[str] = None
 
 
 class InterruptAudioAndAnnounceRequest(_serialization.Model):
@@ -3646,7 +3658,7 @@ class MediaStreamingFailed(_serialization.Model):
         :paramtype result_information: ~azure.communication.callautomation.models.ResultInformation
         """
         super().__init__(**kwargs)
-        self.media_streaming_update = None
+        self.media_streaming_update: Optional["_models.MediaStreamingUpdate"] = None
         self.call_connection_id = call_connection_id
         self.server_call_id = server_call_id
         self.correlation_id = correlation_id
@@ -3805,7 +3817,7 @@ class MediaStreamingStarted(_serialization.Model):
         :paramtype result_information: ~azure.communication.callautomation.models.ResultInformation
         """
         super().__init__(**kwargs)
-        self.media_streaming_update = None
+        self.media_streaming_update: Optional["_models.MediaStreamingUpdate"] = None
         self.call_connection_id = call_connection_id
         self.server_call_id = server_call_id
         self.correlation_id = correlation_id
@@ -3874,7 +3886,7 @@ class MediaStreamingStopped(_serialization.Model):
         :paramtype result_information: ~azure.communication.callautomation.models.ResultInformation
         """
         super().__init__(**kwargs)
-        self.media_streaming_update = None
+        self.media_streaming_update: Optional["_models.MediaStreamingUpdate"] = None
         self.call_connection_id = call_connection_id
         self.server_call_id = server_call_id
         self.correlation_id = correlation_id
@@ -4946,7 +4958,7 @@ class RecognizeCompleted(_serialization.Model):
         self.recognition_type = recognition_type
         self.dtmf_result = dtmf_result
         self.choice_result = choice_result
-        self.speech_result = None
+        self.speech_result: Optional["_models.SpeechResult"] = None
 
 
 class RecognizeFailed(_serialization.Model):
@@ -5303,13 +5315,13 @@ class RecordingResultResponse(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.recording_id = None
-        self.recording_storage_info = None
-        self.errors = None
-        self.recording_start_time = None
-        self.recording_duration_ms = None
-        self.session_end_reason = None
-        self.recording_expiration_time = None
+        self.recording_id: Optional[str] = None
+        self.recording_storage_info: Optional["_models.RecordingStorageInfo"] = None
+        self.errors: Optional[List["_models.Error"]] = None
+        self.recording_start_time: Optional[datetime.datetime] = None
+        self.recording_duration_ms: Optional[int] = None
+        self.session_end_reason: Optional[Union[str, "_models.CallSessionEndReason"]] = None
+        self.recording_expiration_time: Optional[datetime.datetime] = None
 
 
 class RecordingStateChanged(_serialization.Model):
@@ -5384,9 +5396,9 @@ class RecordingStateChanged(_serialization.Model):
         self.call_connection_id = call_connection_id
         self.server_call_id = server_call_id
         self.correlation_id = correlation_id
-        self.recording_id = None
+        self.recording_id: Optional[str] = None
         self.state = state
-        self.start_date_time = None
+        self.start_date_time: Optional[datetime.datetime] = None
         self.recording_kind = recording_kind
         self.result_information = result_information
 
@@ -5436,7 +5448,7 @@ class RecordingStorageInfo(_serialization.Model):
     """Container for chunks.
 
     :ivar recording_chunks: Collection of
-     {Microsoft.Skype.Platform.ExecutionAgent.Azure.Communication.Service.ServerCalling.Content.Contracts.ALPHA4_2024_09_01_preview.Models.RecordingChunkStorageInfo}.  # pylint: disable=line-too-long
+     {Microsoft.Skype.Platform.ExecutionAgent.Azure.Communication.Service.ServerCalling.Content.Contracts.ALPHA4_2024_09_01_preview.Models.RecordingChunkStorageInfo}.
     :vartype recording_chunks:
      list[~azure.communication.callautomation.models.RecordingChunkStorageInfo]
     """
@@ -5450,7 +5462,7 @@ class RecordingStorageInfo(_serialization.Model):
     ) -> None:
         """
         :keyword recording_chunks: Collection of
-         {Microsoft.Skype.Platform.ExecutionAgent.Azure.Communication.Service.ServerCalling.Content.Contracts.ALPHA4_2024_09_01_preview.Models.RecordingChunkStorageInfo}.  # pylint: disable=line-too-long
+         {Microsoft.Skype.Platform.ExecutionAgent.Azure.Communication.Service.ServerCalling.Content.Contracts.ALPHA4_2024_09_01_preview.Models.RecordingChunkStorageInfo}.
         :paramtype recording_chunks:
          list[~azure.communication.callautomation.models.RecordingChunkStorageInfo]
         """
@@ -6095,8 +6107,8 @@ class StartCallRecordingRequest(_serialization.Model):
     :vartype audio_channel_participant_ordering:
      list[~azure.communication.callautomation.models.CommunicationIdentifierModel]
     :ivar channel_affinity: The channel affinity of call recording
-     When 'recordingChannelType' is set to 'unmixed', if channelAffinity is not specified,
-     'channel' will be automatically assigned.
+     When 'recordingChannelType' is set to 'unmixed', if channelAffinity is not specified, 'channel'
+     will be automatically assigned.
      Channel-Participant mapping details can be found in the metadata of the recording.
      ///.
     :vartype channel_affinity: list[~azure.communication.callautomation.models.ChannelAffinity]
@@ -6170,8 +6182,8 @@ class StartCallRecordingRequest(_serialization.Model):
         :paramtype audio_channel_participant_ordering:
          list[~azure.communication.callautomation.models.CommunicationIdentifierModel]
         :keyword channel_affinity: The channel affinity of call recording
-         When 'recordingChannelType' is set to 'unmixed', if channelAffinity is not specified,
-         'channel' will be automatically assigned.
+         When 'recordingChannelType' is set to 'unmixed', if channelAffinity is not specified, 'channel'
+         will be automatically assigned.
          Channel-Participant mapping details can be found in the metadata of the recording.
          ///.
         :paramtype channel_affinity: list[~azure.communication.callautomation.models.ChannelAffinity]
@@ -6315,7 +6327,7 @@ class StartRecordingFailed(_serialization.Model):
         super().__init__(**kwargs)
         self.call_connection_id = call_connection_id
         self.correlation_id = correlation_id
-        self.recording_id = None
+        self.recording_id: Optional[str] = None
 
 
 class StartTranscriptionRequest(_serialization.Model):
@@ -6569,7 +6581,7 @@ class TranscriptionFailed(_serialization.Model):
         :paramtype result_information: ~azure.communication.callautomation.models.ResultInformation
         """
         super().__init__(**kwargs)
-        self.transcription_update = None
+        self.transcription_update: Optional["_models.TranscriptionUpdate"] = None
         self.call_connection_id = call_connection_id
         self.server_call_id = server_call_id
         self.correlation_id = correlation_id
@@ -6712,7 +6724,7 @@ class TranscriptionStarted(_serialization.Model):
         :paramtype result_information: ~azure.communication.callautomation.models.ResultInformation
         """
         super().__init__(**kwargs)
-        self.transcription_update = None
+        self.transcription_update: Optional["_models.TranscriptionUpdate"] = None
         self.call_connection_id = call_connection_id
         self.server_call_id = server_call_id
         self.correlation_id = correlation_id
@@ -6780,7 +6792,7 @@ class TranscriptionStopped(_serialization.Model):
         :paramtype result_information: ~azure.communication.callautomation.models.ResultInformation
         """
         super().__init__(**kwargs)
-        self.transcription_update = None
+        self.transcription_update: Optional["_models.TranscriptionUpdate"] = None
         self.call_connection_id = call_connection_id
         self.server_call_id = server_call_id
         self.correlation_id = correlation_id
@@ -6939,7 +6951,7 @@ class TranscriptionUpdated(_serialization.Model):
         :paramtype result_information: ~azure.communication.callautomation.models.ResultInformation
         """
         super().__init__(**kwargs)
-        self.transcription_update = None
+        self.transcription_update: Optional["_models.TranscriptionUpdate"] = None
         self.call_connection_id = call_connection_id
         self.server_call_id = server_call_id
         self.correlation_id = correlation_id
