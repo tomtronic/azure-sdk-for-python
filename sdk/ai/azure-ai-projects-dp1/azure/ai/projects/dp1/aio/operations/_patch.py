@@ -19,10 +19,10 @@ from ...models._models import (
     PendingUploadRequest,
     PendingUploadType,
     PendingUploadResponse,
-    CredentialType,
 )
 from ...models._enums import (
     DatasetType,
+    AuthenticationType,
 )
 
 logger = logging.getLogger(__name__)
@@ -54,7 +54,7 @@ class DatasetsOperations(DatasetsOperationsGenerated):
             raise ValueError("Blob reference for consumption is not present")
         if not pending_upload_response.blob_reference_for_consumption.credential.type:
             raise ValueError("Credential type is not present")
-        if pending_upload_response.blob_reference_for_consumption.credential.type != CredentialType.SAS:
+        if pending_upload_response.blob_reference_for_consumption.credential.type != AuthenticationType.SAS:
             raise ValueError("Credential type is not SAS")
         if not pending_upload_response.blob_reference_for_consumption.blob_uri:
             raise ValueError("Blob URI is not present or empty")
@@ -90,7 +90,7 @@ class DatasetsOperations(DatasetsOperationsGenerated):
                 "[%s] pending_upload_response.blob_reference_for_consumption.credential.type = %s.",
                 method,
                 pending_upload_response.blob_reference_for_consumption.credential.type,
-            )  # == CredentialType.SAS
+            )  # == AuthenticationType.SAS
 
         # For overview on Blob storage SDK in Python see:
         # https://learn.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-python

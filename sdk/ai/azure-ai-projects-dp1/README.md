@@ -65,7 +65,7 @@ To report an issue with the client library, or request additional features, plea
 - Python 3.8 or later.
 - An [Azure subscription][azure_sub].
 - A [project in Azure AI Foundry](https://learn.microsoft.com/azure/ai-studio/how-to/create-projects).
-- The project endpoint URL, of the form `https://<your-azure-resouce-name>.??.??.??/api/projects/<your-project-name>`. It can be found in your Azure AI Foundry project overview page, under "Project details". Below we will assume the environment variable `PROJECT_ENDPOINT` was defined to hold this value.
+- The project endpoint URL, of the form ` https://<ai-services-name>.services.ai.azure.com/api/projects/<project-name>`. It can be found in your Azure AI Foundry project overview page, under "Project details". Below we will assume the environment variable `PROJECT_ENDPOINT` was defined to hold this value.
 - Either an Entra ID token or an API key is needed to authenticate the client.
 - For API key authentication, find your key in your Azure AI Foundry project overview page, under "Project details". Below we will assume the
 environment variable `PROJECT_API_KEY` was defined to hold this value.

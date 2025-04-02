@@ -6,9 +6,49 @@
 
 Follow our quickstart for examples: https://aka.ms/azsdk/python/dpcodegen/python/customize
 """
-from typing import List
+from typing import List, Union, Any
+from azure.core.credentials import AzureKeyCredential
+from ._client import AIProjectClient as AIProjectClientGenerated
 
-__all__: List[str] = []  # Add all objects you want publicly available to users at this package level
+class AIProjectClient(AIProjectClientGenerated):  # pylint: disable=too-many-instance-attributes
+    """AIProjectClient.
+
+    :ivar service_patterns: ServicePatternsOperations operations
+    :vartype service_patterns: azure.ai.projects.dp1.operations.ServicePatternsOperations
+    :ivar connections: ConnectionsOperations operations
+    :vartype connections: azure.ai.projects.dp1.operations.ConnectionsOperations
+    :ivar evaluations: EvaluationsOperations operations
+    :vartype evaluations: azure.ai.projects.dp1.operations.EvaluationsOperations
+    :ivar datasets: DatasetsOperations operations
+    :vartype datasets: azure.ai.projects.dp1.operations.DatasetsOperations
+    :ivar indexes: IndexesOperations operations
+    :vartype indexes: azure.ai.projects.dp1.operations.IndexesOperations
+    :ivar deployments: DeploymentsOperations operations
+    :vartype deployments: azure.ai.projects.dp1.operations.DeploymentsOperations
+    :ivar evaluation_results: EvaluationResultsOperations operations
+    :vartype evaluation_results: azure.ai.projects.dp1.operations.EvaluationResultsOperations
+    :ivar red_teams: RedTeamsOperations operations
+    :vartype red_teams: azure.ai.projects.dp1.operations.RedTeamsOperations
+    :param endpoint: Project endpoint in the form of:
+     https://<aiservices-id>.services.ai.azure.com/api/projects/<project-name>. Required.
+    :type endpoint: str
+    :param credential: Credential used to authenticate requests to the service. Is either a key
+     credential type or a token credential type. Required.
+    :type credential: ~azure.core.credentials.AzureKeyCredential or
+     ~azure.core.credentials.TokenCredential
+    :keyword api_version: The API version to use for this operation. Default value is
+     "2025-05-15-preview". Note that overriding this default value may result in unsupported
+     behavior.
+    :paramtype api_version: str
+    """
+
+    def __init__(self, endpoint: str, credential: Union[AzureKeyCredential, "TokenCredential"], **kwargs: Any) -> None:
+        super().__init__(endpoint=endpoint, credential=credential, **kwargs)
+
+
+__all__: List[str] = [
+    "AIProjectClient",
+]  # Add all objects you want publicly available to users at this package level
 
 
 def patch_sdk():
